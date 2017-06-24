@@ -10,7 +10,7 @@ import java.util.ArrayList;
  *
  */
 public class User {
-	
+
 	/**
 	 * Determines if the user's fields are updated.
 	 */
@@ -25,20 +25,33 @@ public class User {
 	 * Messages a user sent.
 	 */
 	private ArrayList<String> messages;
-	
+
 	/**
 	 * Amount of character a user sent.
 	 */
 	private int characterCount = 0;
+
+	/**
+	 * Percentage of messages this user sent in the group it's part of.
+	 */
+	private double messagePercentage;
 	
 	/**
+	 * Percentage of characters this user sent in the group it's part of.
+	 */
+	private double charactersPercentage;
+
+
+	/**
 	 * Constructor.
-	 * @param name Name of the user.
+	 * 
+	 * @param name
+	 *            Name of the user.
 	 */
 	public User(final String name) {
 		this.name = name;
 	}
-	
+
 	public void update() {
 		calculateCharacters();
 		updated = true;
@@ -66,36 +79,50 @@ public class User {
 		}
 		return result;
 	}
-	
+
 	/**
 	 * Calculates the amount of characters the user sent.
 	 */
 	private void calculateCharacters() {
 		characterCount = 0;
-		for(final String message : getMessages()) {
+		for (final String message : getMessages()) {
 			characterCount += message.length();
 		}
 	}
-	
+
 	/**
-	 * Returns the character count.
-	 * May trigger the update() trigger.
+	 * Returns the character count. May trigger the update() trigger.
 	 * 
 	 * @return
 	 */
 	public int charactersSent() {
-		if(!updated) {
+		if (!updated) {
 			update();
 		}
 		return characterCount;
 	}
-	
+
 	/**
 	 * The amount of messages a user sent in a group.
+	 * 
 	 * @return The amount of messages sent.
 	 */
 	public int messagesSent() {
-		return this.messages.size();
+		return messages.size();
+	}
+	
+	/**
+	 * Message percentage of a group.
+	 */
+	public double messagePercentage() {
+		return messagePercentage;
+	}
+	
+	/**
+	 * Characters percentage of a group.
+	 */
+	public double charactersPercentage() {
+		return charactersPercentage;
 	}
 
 	/// Start setters and Getters ///
@@ -125,10 +152,31 @@ public class User {
 	}
 
 	/**
-	 * @param messages The messages a user sent.
+	 * @param messages
+	 *            The messages a user sent.
 	 */
 	public void setMessages(ArrayList<String> messages) {
 		updated = false;
 		this.messages = messages;
+	}
+
+	/**
+	 * Sets the percentage of messages this person sent in a group.
+	 * 
+	 * @param percentage
+	 *            Percentage of messages.
+	 */
+	protected void setMessagePercentage(final double percentage) {
+		this.messagePercentage = percentage;
+	}
+	
+	/**
+	 * Sets the percentage of characters this person sent in a group.
+	 * 
+	 * @param percentage
+	 *            Percentage of characters.
+	 */
+	protected void setCharactersPercentage(final double percentage) {
+		this.charactersPercentage = percentage;
 	}
 }

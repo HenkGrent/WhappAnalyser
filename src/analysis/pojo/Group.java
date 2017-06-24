@@ -4,6 +4,7 @@ import java.awt.List;
 import java.util.ArrayList;
 
 import analysis.FileReader.pojoReader;
+import analysis.FileReader.statisticsReader;
 
 /**
  * POJO which represents a group of people in the same Whatsapp chat. A group
@@ -50,6 +51,13 @@ public class Group extends ArrayList<User> {
 	public void buildUsers() {
 		pojoReader.addUsers(filePath, this);
 	}
+	
+	/**
+	 * Adds all messages to the users part of this group..
+	 */
+	public void buildUserMessages() {
+		statisticsReader.addUserMessages(filePath, this);
+	}
 
 	/**
 	 * Checks if the group contains a certain user.
@@ -67,6 +75,36 @@ public class Group extends ArrayList<User> {
 			}
 		}
 		return result;
+	}
+
+	/**
+	 * Calculates the message percentage for every user in this group.
+	 * O(2n)
+	 */
+	public void calculateUserPercentages() {
+		double sum = 0;
+		for (final User user : this) {
+			sum += user.messagesSent();
+		}
+		
+		for (final User user : this) {
+			user.setMessagePercentage(user.messagesSent()/sum);
+		}
+	}
+	
+	/**
+	 * Calculates the characers percentage for every user in this group.
+	 * O(2n)
+	 */
+	public void calculateUserPercentagesChar() {
+		double sum = 0;
+		for (final User user : this) {
+			sum += user.charactersSent();
+		}
+		
+		for (final User user : this) {
+			user.setCharactersPercentage(user.charactersSent()/sum);
+		}
 	}
 
 	/**

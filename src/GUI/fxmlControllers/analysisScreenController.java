@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.IOException;
 
 import analysis.pojo.Group;
+import analysis.pojo.User;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
@@ -69,6 +72,18 @@ public class analysisScreenController {
 		this.group = new Group("AnyGroup");
 		group.setFilePath(getFilePath());
 		group.buildUsers();
+		group.buildUserMessages();
+		group.calculateUserPercentages();
+		group.calculateUserPercentagesChar();
+		
+		ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+
+		for(final User user : group) {
+			PieChart.Data input = new PieChart.Data(user.getName(), user.charactersPercentage());
+			pieChartData.add(input);
+		}
+
+		PieChartMD.setData(pieChartData);
 	}
 
 	/**
