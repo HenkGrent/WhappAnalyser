@@ -36,7 +36,6 @@ public class pojoReader {
 		// Scan through the entire document.
 		while (sc.hasNextLine()) {
 			String line = sc.nextLine();
-			System.out.println(line);
 			// The first check is done to ensure the substring check doesn't
 			// throw an error.
 			if (line.length() > 20 && line.substring(20, 21).equals(":")) {
@@ -44,7 +43,7 @@ public class pojoReader {
 				final String lineNoDate = line.substring(21, line.length());
 				final int messageStart = lineNoDate.indexOf(":");
 				if (messageStart > -1) {
-					final String name = lineNoDate.substring(0, messageStart);
+					final String name = lineNoDate.substring(1, messageStart);
 					final User user = new User(name);
 					if (!group.contains(user)) {
 						group.addUser(user);

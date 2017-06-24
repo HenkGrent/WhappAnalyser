@@ -1,5 +1,7 @@
 package analysis.pojo;
 
+import java.util.ArrayList;
+
 /**
  * POJO which represents a person who participated (i.e. did anything) in a
  * Whatsapp Chat.
@@ -14,6 +16,15 @@ public class User {
 	 */
 	private String name;
 
+	/**
+	 * Messages a user sent.
+	 */
+	private ArrayList<String> messages;
+	
+	/**
+	 * Constructor.
+	 * @param name Name of the user.
+	 */
 	public User(final String name) {
 		this.name = name;
 	}
@@ -58,5 +69,19 @@ public class User {
 	 */
 	public void setName(final String name) {
 		this.name = name;
+	}
+
+	/**
+	 * @return the messages the user sent.
+	 */
+	public ArrayList<String> getMessages() {
+		return messages;
+	}
+
+	/**
+	 * @param messages The messages a user sent.
+	 */
+	public void setMessages(ArrayList<String> messages) {
+		this.messages = messages;
 	}
 }

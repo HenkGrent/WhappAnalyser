@@ -54,18 +54,40 @@ public class Group extends ArrayList<User> {
 	/**
 	 * Checks if the group contains a certain user.
 	 * 
-	 * @param user User to check for.
+	 * @param user
+	 *            User to check for.
 	 * @return True if it does contain the user.
 	 */
 	public boolean contains(final User user) {
 		boolean result = false;
-		for(final User user2 : this) {
-			if(user.equals(user2)) {
+		for (final User user2 : this) {
+			if (user.equals(user2)) {
 				result = true;
 				break;
 			}
 		}
 		return result;
+	}
+
+	/**
+	 * Gets the user by Name from this group.
+	 * 
+	 * @param name
+	 *            Name of the user to get.
+	 * @return Null if the user is not present in the group, returns the user
+	 *         otherwise.
+	 */
+	public User getUserByName(final String name) {
+		User user = null;
+
+		for (final User user2 : this) {
+			if (user2.getName().equals(name)) {
+				user = user2;
+				break;
+			}
+		}
+
+		return user;
 	}
 
 	/// Start Setters and Getters ///
