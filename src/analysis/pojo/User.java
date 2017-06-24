@@ -10,6 +10,11 @@ import java.util.ArrayList;
  *
  */
 public class User {
+	
+	/**
+	 * Determines if the user's fields are updated.
+	 */
+	private boolean updated = false;
 
 	/**
 	 * Represents the name of a user (e.g. "John").
@@ -22,11 +27,21 @@ public class User {
 	private ArrayList<String> messages;
 	
 	/**
+	 * Amount of character a user sent.
+	 */
+	private int characterCount = 0;
+	
+	/**
 	 * Constructor.
 	 * @param name Name of the user.
 	 */
 	public User(final String name) {
 		this.name = name;
+	}
+	
+	public void update() {
+		calculateCharacters();
+		updated = true;
 	}
 
 	/**
@@ -50,6 +65,37 @@ public class User {
 			result = (this.getName().equals(that.getName()));
 		}
 		return result;
+	}
+	
+	/**
+	 * Calculates the amount of characters the user sent.
+	 */
+	private void calculateCharacters() {
+		characterCount = 0;
+		for(final String message : getMessages()) {
+			characterCount += message.length();
+		}
+	}
+	
+	/**
+	 * Returns the character count.
+	 * May trigger the update() trigger.
+	 * 
+	 * @return
+	 */
+	public int charactersSent() {
+		if(!updated) {
+			update();
+		}
+		return characterCount;
+	}
+	
+	/**
+	 * The amount of messages a user sent in a group.
+	 * @return The amount of messages sent.
+	 */
+	public int messagesSent() {
+		return this.messages.size();
 	}
 
 	/// Start setters and Getters ///
@@ -82,6 +128,7 @@ public class User {
 	 * @param messages The messages a user sent.
 	 */
 	public void setMessages(ArrayList<String> messages) {
+		updated = false;
 		this.messages = messages;
 	}
 }

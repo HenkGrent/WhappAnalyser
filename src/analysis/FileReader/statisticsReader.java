@@ -76,8 +76,6 @@ public class statisticsReader {
 		// Scan through the entire document.
 		while (sc.hasNextLine()) {
 			String line = sc.nextLine();
-			// The first check is done to ensure the substring check doesn't
-			// throw an error.
 			if (line.length() > 20 && line.substring(20, 21).equals(":")) {
 				// The line without the date.
 				final String lineNoDate = line.substring(21, line.length());
