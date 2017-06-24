@@ -11,7 +11,7 @@
    <children>
       <PieChart fx:id="PieChartMD" layoutX="31.0" layoutY="87.0" prefHeight="660.0" prefWidth="674.0" />
       <HBox layoutX="14.0" layoutY="70.0" prefHeight="7.0" prefWidth="708.0" style="-fx-background-color: black;" />
-      <Button fx:id="MenuButtonInject" disable="true" layoutX="621.0" layoutY="14.0" maxWidth="101.0" mnemonicParsing="false" onAction="#disableButton" onMouseClicked="#addPieChartData" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 2;" text="READ">
+      <Button fx:id="menuButtonBuild" disable="true" layoutX="621.0" layoutY="14.0" maxWidth="101.0" mnemonicParsing="false" onAction="#disableButton" onMouseClicked="#buildGroup" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 2;" text="READ">
          <font>
             <Font name="Roboto Black" size="25.0" />
          </font>
