@@ -2,7 +2,6 @@ package analysis.pojo;
 
 import java.awt.List;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import analysis.FileReader.pojoReader;
 
@@ -13,22 +12,17 @@ import analysis.FileReader.pojoReader;
  * @author Henk
  *
  */
-public class Group {
+public class Group extends ArrayList<User> {
 
 	/**
 	 * Name of the chat the group is part of.
 	 */
 	private String name;
-	
+
 	/**
 	 * File path to the file used for creating buildig this group.
 	 */
 	private String filePath;
-
-	/**
-	 * Users part of this group.
-	 */
-	private ArrayList<User> users = new ArrayList<>();
 
 	/**
 	 * Constructor
@@ -47,30 +41,64 @@ public class Group {
 	 *            User to add to the group.
 	 */
 	public void addUser(final User user) {
-		this.users.add(user);
+		this.add(user);
 	}
-	
+
 	/**
 	 * Adds all users in it's specified file to it's group.
 	 */
 	public void buildUsers() {
 		pojoReader.addUsers(filePath, this);
 	}
-	
+
 	/**
 	 * Checks if the group contains a certain user.
-	 * @param user
-	 * @return
+	 * 
+	 * @param user User to check for.
+	 * @return True if it does contain the user.
 	 */
 	public boolean contains(final User user) {
-		return users.contains(user);
+		boolean result = false;
+		for(final User user2 : this) {
+			if(user.equals(user2)) {
+				result = true;
+				break;
+			}
+		}
+		return result;
 	}
-	
+
+	/// Start Setters and Getters ///
+
 	/**
 	 * Sets the file path used for building this group.
-	 * @param filePath File path (e.g. C:/user/John/deer.txt)
+	 * 
+	 * @param filePath
+	 *            File path (e.g. C:/user/John/deer.txt)
 	 */
 	public void setFilePath(final String filePath) {
 		this.filePath = filePath;
+	}
+
+	/**
+	 * @return The name of the group.
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @param name
+	 *            The name of the group to set.
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * @return The file path of the file used to build this group.
+	 */
+	public String getFilePath() {
+		return filePath;
 	}
 }

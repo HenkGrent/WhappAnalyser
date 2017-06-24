@@ -13,7 +13,7 @@ import analysis.pojo.Group;
 import analysis.pojo.User;
 
 public class pojoReader {
-	
+
 	/**
 	 * Builds all the Users for a Group. Ignoring users who added or changed
 	 * something.
@@ -33,22 +33,22 @@ public class pojoReader {
 		}
 
 		final Scanner sc = new Scanner(reader);
-		sc.next();
 		// Scan through the entire document.
 		while (sc.hasNextLine()) {
 			String line = sc.nextLine();
-			// The first check is done to ensure the substring check doesn't throw an error.
+			System.out.println(line);
+			// The first check is done to ensure the substring check doesn't
+			// throw an error.
 			if (line.length() > 20 && line.substring(20, 21).equals(":")) {
 				// The line without the date.
 				final String lineNoDate = line.substring(21, line.length());
-				try {
-					final String name = lineNoDate.substring(0, lineNoDate.indexOf(":"));
+				final int messageStart = lineNoDate.indexOf(":");
+				if (messageStart > -1) {
+					final String name = lineNoDate.substring(0, messageStart);
 					final User user = new User(name);
 					if (!group.contains(user)) {
 						group.addUser(user);
 					}
-				} catch (Exception exception) {
-					continue;
 				}
 			}
 		}

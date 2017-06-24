@@ -49,4 +49,14 @@ public class User {
 	public String getName() {
 		return this.name;
 	}
+
+	/**
+	 * Sets the name of the user.
+	 * 
+	 * @param name
+	 *            The name of the user. (e.g. John Benedict).
+	 */
+	public void setName(final String name) {
+		this.name = name;
+	}
 }
